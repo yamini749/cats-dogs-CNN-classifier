@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat or Dog Classifier</title>
+</head>
+<body>
+    <h1>Upload an Image to Classify</h1>
+    <form id="uploadForm" enctype="multipart/form-data" method="POST">
+        <label for="file">Choose an image:</label>
+        <input type="file" id="file" name="imagefile" accept="image/*" required> <!-- Changed 'file' to 'imagefile' -->
+        <br><br>
+        <button type="submit">Upload and Predict</button>
+    </form>
+
+    <h2 id="result"></h2>
+
+    <script>
+        // Handle form submission
+        document.getElementById('uploadForm').onsubmit = async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData();
+            const fileInput = document.getElementById('file');
+            formData.append('imagefile', fileInput.files[0]); // Use 'imagefile' to match Flask
+
+            try {
+                const response = await fetch('/', { // Change to fetch from the root path
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (result.error) {
+                    document.getElementById('result').textContent = `Error: ${result.error}`;
+                } else {
+                    document.getElementById('result').textContent = `Prediction: ${result.prediction}`;
+                }
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error occurred!';
+            }
+        };
+    </script>
+</body>
+</html>
