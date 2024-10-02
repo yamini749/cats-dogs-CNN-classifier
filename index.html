@@ -4,17 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat or Dog Classifier</title>
+    <style>
+        /* Center everything inside the main container */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        /* Top heading style */
+        header {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Center the form container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px); /* Adjust height to fit the header */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label, input {
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Result text styling */
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload an Image to Classify</h1>
-    <form id="uploadForm" enctype="multipart/form-data" method="POST">
-        <label for="file">Choose an image:</label>
-        <input type="file" id="file" name="imagefile" accept="image/*" required> <!-- Changed 'file' to 'imagefile' -->
-        <br><br>
-        <button type="submit">Upload and Predict</button>
-    </form>
-
-    <h2 id="result"></h2>
+    <header>
+        <h1>Upload an Image to Classify</h1>
+    </header>
+    
+    <div class="container">
+        <form id="uploadForm" enctype="multipart/form-data" method="POST">
+            <label for="file">Choose an image:</label>
+            <input type="file" id="file" name="imagefile" accept="image/*" required>
+            <br><br>
+            <button type="submit">Upload and Predict</button>
+            <h2 id="result"></h2>
+        </form>
+    </div>
 
     <script>
         // Handle form submission
